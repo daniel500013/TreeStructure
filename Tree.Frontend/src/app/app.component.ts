@@ -80,7 +80,15 @@ export class AppComponent implements OnInit {
         addButton.classList.add('m-1');
         addButton.addEventListener('click', this.addOnClick.bind(this));
 
+        changeButton.textContent = "Zmień";
+        changeButton.classList.add('btn');
+        changeButton.classList.add('btn-warning');
+        changeButton.classList.add('text-white');
+        changeButton.classList.add('m-1');
+        changeButton.addEventListener('click', this.changeOnClick.bind(this));
+
         buttonContainer.appendChild(addButton);
+        buttonContainer.appendChild(changeButton);
 
         button.appendChild(buttonContainer);
 
@@ -233,7 +241,15 @@ export class AppComponent implements OnInit {
     addButton.classList.add('m-1');
     addButton.addEventListener('click', this.addOnClick.bind(this));
 
+    changeButton.textContent = "Zmień";
+    changeButton.classList.add('btn');
+    changeButton.classList.add('btn-warning');
+    changeButton.classList.add('text-white');
+    changeButton.classList.add('m-1');
+    changeButton.addEventListener('click', this.changeOnClick.bind(this));
+
     buttonContainer.appendChild(addButton);
+    buttonContainer.appendChild(changeButton);
 
     button.appendChild(buttonContainer);
 
@@ -262,6 +278,32 @@ export class AppComponent implements OnInit {
 
     this.http.post("https://localhost:7052/api/Tree", treeDto).subscribe((res: any) => {
       this.addNode(res, parentID);
+    });
+  }
+
+  changeOnClick(event: any) {
+    let parentID = event.target.parentElement.parentElement.parentElement;
+
+    let name = prompt("Nowa nazwa folderu:");
+
+    const treeDto = {
+      treeID: parentID.id,
+      name: name,
+      parentID: parentID.parentElement.parentElement.id
+    }
+
+    this.http.put("https://localhost:7052/api/Tree", treeDto).subscribe((res) => {
+      //console.log(event.target.parentElement.parentElement.firstChild);
+      event.target.parentElement.parentElement.firstChild.textContent = name;
+
+      const buttonIcon: HTMLParagraphElement = this.renderer.createElement('i');
+
+      buttonIcon.classList.add('bi');
+      buttonIcon.classList.add('bi-folder-fill');
+      buttonIcon.classList.add('float-start');
+      buttonIcon.classList.add('me-2');
+
+      event.target.parentElement.parentElement.firstChild.appendChild(buttonIcon);
     });
   }
 }
