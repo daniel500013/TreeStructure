@@ -72,6 +72,20 @@ export class AppComponent implements OnInit {
 
         // Button text end \\
 
+        // Container start \\
+
+        addButton.textContent = 'Dodaj';
+        addButton.classList.add('btn');
+        addButton.classList.add('btn-primary');
+        addButton.classList.add('m-1');
+        addButton.addEventListener('click', this.addOnClick.bind(this));
+
+        buttonContainer.appendChild(addButton);
+
+        button.appendChild(buttonContainer);
+
+        // Container end \\
+
         li.classList.add("list-unstyled");
         li.classList.add("mt-1");
 
@@ -119,6 +133,20 @@ export class AppComponent implements OnInit {
 
         // Button text end \\
 
+        // Container start \\
+
+        addButton.textContent = 'Dodaj';
+        addButton.classList.add('btn');
+        addButton.classList.add('btn-primary');
+        addButton.classList.add('m-1');
+        addButton.addEventListener('click', this.addOnClick.bind(this));
+
+        buttonContainer.appendChild(addButton);
+
+        button.appendChild(buttonContainer);
+
+        // Container end \\
+
         li.classList.add('list-unstyled');
         li.classList.add('mt-1');
 
@@ -147,5 +175,93 @@ export class AppComponent implements OnInit {
         }
       }
     }
+  }
+
+  addNode(res: any, parentID: any) {
+    const ul: HTMLParagraphElement = this.renderer.createElement('ul');
+    const li: HTMLParagraphElement = this.renderer.createElement('li');
+    const button: HTMLParagraphElement = this.renderer.createElement('button');
+    const buttonSpan: HTMLParagraphElement = this.renderer.createElement('div');
+    const buttonContainer: HTMLParagraphElement = this.renderer.createElement('div');
+    const addButton: HTMLParagraphElement = this.renderer.createElement('button');
+    const changeButton: HTMLParagraphElement = this.renderer.createElement('button');
+    const deleteButton: HTMLParagraphElement = this.renderer.createElement('button');
+    const sortButton: HTMLParagraphElement = this.renderer.createElement('button');
+
+    const buttonIcon: HTMLParagraphElement = this.renderer.createElement('i');
+
+    ul.classList.add("folder-container");
+
+    parentID.appendChild(ul);
+
+    //button.textContent = res[index].name;
+
+    button.classList.add('btn');
+    button.classList.add('folder-bg');
+    button.classList.add('w-100');
+    button.classList.add('text-start');
+    button.classList.add('d-flex');
+    button.classList.add('justify-content-between');
+
+    button.addEventListener('click', this.onClick.bind(this));
+
+    // Button icon start \\
+
+    buttonIcon.classList.add('bi');
+    buttonIcon.classList.add('bi-folder-fill');
+    buttonIcon.classList.add('float-start');
+    buttonIcon.classList.add('me-2');
+
+    // Button icon end \\
+
+    // Button text start \\
+
+    buttonSpan.textContent = res.name;
+    buttonSpan.classList.add('mt-2-5');
+
+    button.appendChild(buttonSpan);
+
+    buttonSpan.appendChild(buttonIcon);
+
+    // Button text end \\
+
+    // Container start \\
+
+    addButton.textContent = 'Dodaj';
+    addButton.classList.add('btn');
+    addButton.classList.add('btn-primary');
+    addButton.classList.add('m-1');
+    addButton.addEventListener('click', this.addOnClick.bind(this));
+
+    buttonContainer.appendChild(addButton);
+
+    button.appendChild(buttonContainer);
+
+    // Container end \\
+
+    li.classList.add('list-unstyled');
+    li.classList.add('mt-1');
+
+    // li.id = res[index].treeID;
+    li.id = res.treeID;
+    li.appendChild(button);
+
+    ul.appendChild(li);
+  }
+
+  addOnClick(event: any) {
+    let parentID = event.target.parentElement.parentElement.parentElement;
+
+    let name = prompt("Nazwa folderu:");
+
+    const treeDto = {
+      treeID: 0,
+      name: name,
+      parentID: parentID.id
+    }
+
+    this.http.post("https://localhost:7052/api/Tree", treeDto).subscribe((res: any) => {
+      this.addNode(res, parentID);
+    });
   }
 }
