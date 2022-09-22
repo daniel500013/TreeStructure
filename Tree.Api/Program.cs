@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Tree.Api;
+using Tree.Api.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +8,7 @@ builder.Services.AddDbContext<TreeDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DbConnectionString")));
 
 // Add services to the container.
+builder.Services.AddScoped<TreeService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
