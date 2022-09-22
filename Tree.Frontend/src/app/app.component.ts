@@ -87,8 +87,15 @@ export class AppComponent implements OnInit {
         changeButton.classList.add('m-1');
         changeButton.addEventListener('click', this.changeOnClick.bind(this));
 
+        deleteButton.textContent = "Usuń";
+        deleteButton.classList.add("btn");
+        deleteButton.classList.add("btn-danger");
+        deleteButton.classList.add("m-1");
+        deleteButton.addEventListener('click', this.deleteOnClick.bind(this));
+
         buttonContainer.appendChild(addButton);
         buttonContainer.appendChild(changeButton);
+        buttonContainer.appendChild(deleteButton);
 
         button.appendChild(buttonContainer);
 
@@ -248,8 +255,15 @@ export class AppComponent implements OnInit {
     changeButton.classList.add('m-1');
     changeButton.addEventListener('click', this.changeOnClick.bind(this));
 
+    deleteButton.textContent = "Usuń";
+    deleteButton.classList.add("btn");
+    deleteButton.classList.add("btn-danger");
+    deleteButton.classList.add("m-1");
+    deleteButton.addEventListener('click', this.deleteOnClick.bind(this));
+
     buttonContainer.appendChild(addButton);
     buttonContainer.appendChild(changeButton);
+    buttonContainer.appendChild(deleteButton);
 
     button.appendChild(buttonContainer);
 
@@ -304,6 +318,15 @@ export class AppComponent implements OnInit {
       buttonIcon.classList.add('me-2');
 
       event.target.parentElement.parentElement.firstChild.appendChild(buttonIcon);
+    });
+  }
+
+  deleteOnClick(event: any) {
+    let parentID = event.target.parentElement.parentElement.parentElement.id;
+
+    this.http.delete("https://localhost:7052/api/Tree/" + parentID).subscribe(() => {
+      let componentToRemove = (<HTMLInputElement>(document.getElementById(parentID)));
+      componentToRemove.parentElement?.remove();
     });
   }
 }
