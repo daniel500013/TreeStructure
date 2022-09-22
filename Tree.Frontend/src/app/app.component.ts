@@ -365,4 +365,17 @@ export class AppComponent implements OnInit {
       rootComponent.appendChild(element);
     });
   }
+
+  expandOnClick() {
+    this.http.get("https://localhost:7052/api/Tree").subscribe((res: any) => {
+      for (let index = 3; index < res[res.length - 1].treeID; index++) {
+        let expandElement = (<HTMLInputElement>(document.getElementById(index.toString())));
+  
+        if (expandElement != null)
+        {
+          expandElement.classList.remove("d-none");
+        }
+      }
+    });
+  }
 }
