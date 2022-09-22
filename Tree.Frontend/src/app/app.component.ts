@@ -93,9 +93,16 @@ export class AppComponent implements OnInit {
         deleteButton.classList.add("m-1");
         deleteButton.addEventListener('click', this.deleteOnClick.bind(this));
 
+        sortButton.textContent = "Sortuj";
+        sortButton.classList.add("btn");
+        sortButton.classList.add("btn-success");
+        sortButton.classList.add("m-1");
+        sortButton.addEventListener('click', this.sortOnClick.bind(this, res[index].treeID));
+
         buttonContainer.appendChild(addButton);
         buttonContainer.appendChild(changeButton);
         buttonContainer.appendChild(deleteButton);
+        buttonContainer.appendChild(sortButton);
 
         button.appendChild(buttonContainer);
 
@@ -261,9 +268,16 @@ export class AppComponent implements OnInit {
     deleteButton.classList.add("m-1");
     deleteButton.addEventListener('click', this.deleteOnClick.bind(this));
 
+    sortButton.textContent = "Sortuj";
+    sortButton.classList.add("btn");
+    sortButton.classList.add("btn-success");
+    sortButton.classList.add("m-1");
+    sortButton.addEventListener('click', this.sortOnClick.bind(this, res.treeID));
+
     buttonContainer.appendChild(addButton);
     buttonContainer.appendChild(changeButton);
     buttonContainer.appendChild(deleteButton);
+    buttonContainer.appendChild(sortButton);
 
     button.appendChild(buttonContainer);
 
@@ -327,6 +341,28 @@ export class AppComponent implements OnInit {
     this.http.delete("https://localhost:7052/api/Tree/" + parentID).subscribe(() => {
       let componentToRemove = (<HTMLInputElement>(document.getElementById(parentID)));
       componentToRemove.parentElement?.remove();
+    });
+  }
+
+  sortOnClick(parentID: string) {
+    let rootComponent: any = (<HTMLInputElement>(document.getElementById(parentID)));
+    let tmp = [];
+
+    for (const child of rootComponent.children) {
+      if (child.tagName == "UL")
+      {
+        tmp.push(child);
+      }
+    }
+    
+    tmp.reverse();
+
+    for (let index = 0; index < tmp.length; index++) {
+      rootComponent.removeChild(rootComponent.lastChild);
+    }
+
+    tmp.forEach(element => {
+      rootComponent.appendChild(element);
     });
   }
 }
