@@ -37,9 +37,11 @@ export class AppComponent implements OnInit {
 
       let parentNode = (<HTMLInputElement>(document.getElementById(res[index].parentID)));
       
-      if(parentNode != null)
+      if (parentNode != null)
       {
         ul.classList.add("folder-container");
+
+        ul.addEventListener("dragover", this.dragOver.bind(this));
 
         this.renderer.appendChild(parentNode, ul);
 
@@ -50,7 +52,11 @@ export class AppComponent implements OnInit {
         button.classList.add("d-flex");
         button.classList.add("justify-content-between");
 
+        button.draggable = true;
+
         button.addEventListener('click', this.onClick.bind(this));
+        button.addEventListener('dragstart', this.dragStart.bind(this));
+        button.addEventListener('dragend', this.dragStop.bind(this));
 
         // Button icon start \\
 
@@ -125,6 +131,8 @@ export class AppComponent implements OnInit {
       else
       {
         structure.classList.add("folder-container");
+
+        structure.addEventListener("dragover", this.dragOver.bind(this));
 
         button.classList.add('btn');
         button.classList.add('folder-bg');
@@ -214,6 +222,8 @@ export class AppComponent implements OnInit {
 
     ul.classList.add("folder-container");
 
+    ul.addEventListener("dragover", this.dragOver.bind(this));
+
     parentID.appendChild(ul);
 
     //button.textContent = res[index].name;
@@ -225,7 +235,11 @@ export class AppComponent implements OnInit {
     button.classList.add('d-flex');
     button.classList.add('justify-content-between');
 
+    button.draggable = true;
+
     button.addEventListener('click', this.onClick.bind(this));
+    button.addEventListener('dragstart', this.dragStart.bind(this));
+    button.addEventListener('dragend', this.dragStop.bind(this));
 
     // Button icon start \\
 
@@ -377,5 +391,48 @@ export class AppComponent implements OnInit {
         }
       }
     });
+  }
+
+  dragStart(event: any) {
+    let button = event.target;
+    button.classList.add("drag");
+  }
+
+  dragStop(event: any) {
+    let button = event.target;
+    button.classList.remove("drag");
+
+    let treeID = event.target.parentElement.id;
+    let name = event.target.textContent.replace("DodajZmieńUsuńSortuj", "");
+    let parentID = event.target.parentElement.parentElement.parentElement.id;
+    
+    let treeDto = {
+      treeID: treeID,
+      name: name,
+      parentID: parentID
+    }
+    
+    this.http.put("https://localhost:7052/api/Tree", treeDto).subscribe();
+  }
+
+  dragOver(event: any) {
+    let dragButton = (<HTMLInputElement>(document.querySelector(".drag"))).parentElement;
+    let folderContainer = event.target.parentElement;
+    
+    for (const child of folderContainer.children) {
+      if (child.tagName == "UL" && child.firstChild.classList.contains("d-none"))
+      {
+        dragButton?.classList.add("d-none");
+      }
+      else
+      {
+        dragButton?.classList.remove("d-none");
+      }
+    }
+    
+    if (folderContainer.tagName == "LI")
+    {
+      folderContainer.appendChild(dragButton?.parentElement);
+    }
   }
 }
