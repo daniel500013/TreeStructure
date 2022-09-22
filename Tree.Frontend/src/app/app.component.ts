@@ -50,6 +50,8 @@ export class AppComponent implements OnInit {
         button.classList.add("d-flex");
         button.classList.add("justify-content-between");
 
+        button.addEventListener('click', this.onClick.bind(this));
+
         // Button icon start \\
 
         buttonIcon.classList.add("bi");
@@ -95,6 +97,8 @@ export class AppComponent implements OnInit {
         button.classList.add("d-flex");
         button.classList.add("justify-content-between");
 
+        button.addEventListener('click', this.onClick.bind(this));
+
         // Button icon start \\
 
         buttonIcon.classList.add("bi");
@@ -121,6 +125,26 @@ export class AppComponent implements OnInit {
         li.id = res[index].treeID;
         li.appendChild(button);
         this.renderer.appendChild(structure, li);
+      }
+    }
+  }
+
+  onClick(event: any) {
+    let getUlChild = event.target.parentElement.children;
+    
+    for (const child of getUlChild) {
+      if (child.tagName == "UL")
+      {
+        for (const children of child.children) {
+          if (children.classList.contains("d-none"))
+          {
+            children.classList.remove("d-none");
+          }
+          else
+          {
+            children.classList.add("d-none");
+          }
+        }
       }
     }
   }
