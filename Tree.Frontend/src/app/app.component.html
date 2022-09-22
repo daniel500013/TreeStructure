@@ -1,0 +1,24 @@
+<main class="container-fluid gridCenter vh-100">
+  <div class="blue-gradient rounded shadow vw-77 vh-42 rotate-5 position-absolute">
+      
+  </div>
+
+  <div class="bg-white rounded shadow vw-75 vh-40 position-absolute">
+      <h4 class="m-3">Widok drzewa</h4>
+      <div id="buttons" class="m-3">
+          <button class="btn btn-dark m-1" (click)="expandOnClick()">
+            <i class="bi bi-folder"></i>
+            Rozwiń wszystkie
+          </button>
+          <button class="btn btn-dark m-1" (click)="sortOnClick('2')">
+            <i class="bi bi-bar-chart"></i>
+            Odwróć kierunek sortowania
+          </button>
+      </div>
+      <div class="d-grid m-3" style="height: 25vh; overflow-y: scroll;">
+        <ul id="structure" style="margin-right: 1rem; padding-left: 0rem;">
+
+        </ul>
+      </div>
+  </div>
+</main>
