@@ -10,5 +10,10 @@ namespace Tree.Api
         }
 
         public DbSet<Model.Tree> Tree { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            new TreeConfiguration(modelBuilder).Seed();
+        }
     }
 }
