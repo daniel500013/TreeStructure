@@ -25,6 +25,7 @@ export class TreeService {
       const changeButton: HTMLParagraphElement = this.renderer.createElement('button');
       const deleteButton: HTMLParagraphElement = this.renderer.createElement('button');
       const sortButton: HTMLParagraphElement = this.renderer.createElement('button');
+      const leafButton: HTMLParagraphElement = this.renderer.createElement('button');
       
       const buttonIcon: HTMLParagraphElement = this.renderer.createElement('i');
 
@@ -104,11 +105,19 @@ export class TreeService {
         sortButton.classList.add("m-1");
         sortButton.addEventListener('click', this.sortOnClick.bind(this, res[index].treeID));
 
+        // Konfiguracja przycisku 'Rozwiń węzeł' przy folderze
+        leafButton.textContent = "Rozwiń cały węzeł";
+        leafButton.classList.add("btn");
+        leafButton.classList.add("btn-secondary");
+        leafButton.classList.add("m-1");
+        leafButton.addEventListener('click', this.expandLeafOnClick.bind(this));
+
         // Dodanie przycisków do kontenera
         buttonContainer.appendChild(addButton);
         buttonContainer.appendChild(changeButton);
         buttonContainer.appendChild(deleteButton);
         buttonContainer.appendChild(sortButton);
+        buttonContainer.appendChild(leafButton);
 
         // Dodanie kontenera do przycisku folderu
         button.appendChild(buttonContainer);
@@ -229,6 +238,7 @@ export class TreeService {
     const changeButton: HTMLParagraphElement = this.renderer.createElement('button');
     const deleteButton: HTMLParagraphElement = this.renderer.createElement('button');
     const sortButton: HTMLParagraphElement = this.renderer.createElement('button');
+    const leafButton: HTMLParagraphElement = this.renderer.createElement('button');
 
     const buttonIcon: HTMLParagraphElement = this.renderer.createElement('i');
 
@@ -304,11 +314,19 @@ export class TreeService {
     sortButton.classList.add("m-1");
     sortButton.addEventListener('click', this.sortOnClick.bind(this, res.treeID));
 
+    // Konfiguracja przycisku 'Rozwiń węzeł' przy folderze
+    leafButton.textContent = "Rozwiń cały węzeł";
+    leafButton.classList.add("btn");
+    leafButton.classList.add("btn-secondary");
+    leafButton.classList.add("m-1");
+    leafButton.addEventListener('click', this.expandLeafOnClick.bind(this));
+
     // Dodanie przycisków do kontenera
     buttonContainer.appendChild(addButton);
     buttonContainer.appendChild(changeButton);
     buttonContainer.appendChild(deleteButton);
     buttonContainer.appendChild(sortButton);
+    buttonContainer.appendChild(leafButton);
 
     // Dodanie kontenera do przycisku folderu
     button.appendChild(buttonContainer);
@@ -440,6 +458,33 @@ export class TreeService {
     tmp.forEach(element => {
       rootComponent.appendChild(element);
     });
+  }
+
+  expandLeafOnClick(event: any) {
+    // Inicializacja zmiennej rodzica
+    let liParentElement: any;
+    
+    // Sprawdzenie typu argumentu
+    if (event.type == 'click')
+    {
+      liParentElement = event.target.parentElement.parentElement.parentElement;
+    }
+    else
+    {
+      liParentElement = event.parentElement.parentElement.parentElement;
+    }
+    
+    // Wypisanie wszystkich 'dzieci' elementu
+    for (const child of liParentElement.children) {
+      if (child.tagName == "UL")
+      {
+        // Rekurencja
+        this.expandLeafOnClick(child.firstChild.firstChild.lastChild.lastChild);
+
+        // Pokazanie węzła
+        child.firstChild.classList.remove("d-none");
+      }
+    }
   }
 
   dragStart(event: any) {
