@@ -115,5 +115,82 @@ namespace Tree.Tests
 
             response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
         }
+
+        [Fact]
+        public async Task CreateTreeFolder_WithoutParams_ReturnFailRequest()
+        {
+            //Add Tree
+            var treeDto = new TreeDto()
+            {
+                TreeID = 1,
+                Name = "",
+                ParentID = 1
+            };
+
+            var treeJson = JsonConvert.SerializeObject(treeDto);
+
+            var treeContext = new StringContent(treeJson, Encoding.UTF8, "application/json");
+
+            var response = await Client.PostAsync("/api/Tree", treeContext);
+
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.InternalServerError);
+        }
+
+        [Fact]
+        public async Task PutTreeFolder_WithoutParams_ReturnFailRequest()
+        {
+            //Add tree
+            var treeDto = new TreeDto()
+            {
+                TreeID = 1,
+                Name = "qwerty",
+                ParentID = 1
+            };
+
+            var treeJson = JsonConvert.SerializeObject(treeDto);
+
+            var treeContext = new StringContent(treeJson, Encoding.UTF8, "application/json");
+
+            await Client.PostAsync("/api/Tree", treeContext);
+
+            //Change tree
+            var newTreeDto = new TreeDto()
+            {
+                TreeID = 1,
+                Name = "",
+                ParentID = 1
+            };
+
+            var newTreeJson = JsonConvert.SerializeObject(newTreeDto);
+
+            var newTreeContext = new StringContent(newTreeJson, Encoding.UTF8, "application/json");
+
+            var response = await Client.PutAsync("/api/Tree", newTreeContext);
+
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.InternalServerError);
+        }
+
+        [Fact]
+        public async Task DeleteTreeFolder_WithoutParams_ReturnFailRequest()
+        {
+            //Add tree
+            var treeDto = new TreeDto()
+            {
+                TreeID = 1,
+                Name = "qwerty",
+                ParentID = 1
+            };
+
+            var treeJson = JsonConvert.SerializeObject(treeDto);
+
+            var treeContext = new StringContent(treeJson, Encoding.UTF8, "application/json");
+
+            await Client.PostAsync("/api/Tree", treeContext);
+
+            //Change tree
+            var response = await Client.DeleteAsync("/api/Tree/20");
+
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.InternalServerError);
+        }
     }
 }
