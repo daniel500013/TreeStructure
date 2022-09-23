@@ -389,7 +389,15 @@ export class AppComponent implements OnInit {
 
   expandOnClick() {
     this.http.get("https://localhost:7052/api/Tree").subscribe((res: any) => {
-      for (let index = 3; index < res[res.length - 1].treeID; index++) {
+      let tmp = [1,2,3];
+
+      for (let index = 0; index < res.length; index++) {
+        tmp.push(res[index].treeID);
+      }
+
+      let maxID = tmp.reduce((a, b) => Math.max(a, b), -Infinity);
+    
+      for (let index = 3; index < maxID + 1; index++) {
         let expandElement = (<HTMLInputElement>(document.getElementById(index.toString())));
   
         if (expandElement != null)
