@@ -17,7 +17,8 @@ namespace Tree.Api.Service
         {
             var data = _dbContext.Tree.ToList();
 
-            data.RemoveAt(0);
+            if (data.Count > 0)
+                data.RemoveAt(0);
 
             return data;
         }
