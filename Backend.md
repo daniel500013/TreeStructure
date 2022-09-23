@@ -1,7 +1,7 @@
 # Backend
 Aplikacja powinna działać pod adresem https://localhost:7052
 <br/>
-Jeżeli adres się różni od podanego powyżej zmień port inaczej aplikacja może działać niepoprawnie
+Jeżeli adres się różni od podanego powyżej zmień port, inaczej aplikacja może działać niepoprawnie
 ## Wymagania
 `` SQL Server >2016``
 <br />
