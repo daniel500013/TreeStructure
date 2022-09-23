@@ -28,6 +28,11 @@ export class TreeService {
       const leafButton: HTMLParagraphElement = this.renderer.createElement('button');
       
       const buttonIcon: HTMLParagraphElement = this.renderer.createElement('i');
+      const AddButtonIcon: HTMLParagraphElement = this.renderer.createElement('i');
+      const EditButtonIcon: HTMLParagraphElement = this.renderer.createElement('i');
+      const DeleteButtonIcon: HTMLParagraphElement = this.renderer.createElement('i');
+      const SortButtonIcon: HTMLParagraphElement = this.renderer.createElement('i');
+      const LeafButtonIcon: HTMLParagraphElement = this.renderer.createElement('i');
 
       let parentNode = (<HTMLInputElement>(document.getElementById(res[index].parentID)));
       
@@ -76,41 +81,61 @@ export class TreeService {
         // Dodanie ikony do tekstu
         buttonSpan.appendChild(buttonIcon);
 
+        // Konfiguracja ikony 'Dodaj'
+        AddButtonIcon.classList.add("bi");
+        AddButtonIcon.classList.add("bi-folder-plus");
+        
         // Konfiguracja przycisku 'Dodaj' przy folderze
-        addButton.textContent = 'Dodaj';
         addButton.classList.add('btn');
         addButton.classList.add('btn-primary');
         addButton.classList.add('m-1');
         addButton.addEventListener('click', this.addOnClick.bind(this));
+        addButton.appendChild(AddButtonIcon);
+
+        // Konfiguracja ikony 'Zmień'
+        EditButtonIcon.classList.add("bi");
+        EditButtonIcon.classList.add("bi-cursor-text");
 
         // Konfiguracja przycisku 'Zmień' przy folderze
-        changeButton.textContent = "Zmień";
         changeButton.classList.add('btn');
         changeButton.classList.add('btn-warning');
         changeButton.classList.add('text-white');
         changeButton.classList.add('m-1');
         changeButton.addEventListener('click', this.changeOnClick.bind(this));
+        changeButton.appendChild(EditButtonIcon);
+
+        // Konfiguracja ikony 'Usuń'
+        DeleteButtonIcon.classList.add("bi");
+        DeleteButtonIcon.classList.add("bi-folder-x");
 
         // Konfiguracja przycisku 'Usuń' przy folderze
-        deleteButton.textContent = "Usuń";
         deleteButton.classList.add("btn");
         deleteButton.classList.add("btn-danger");
         deleteButton.classList.add("m-1");
         deleteButton.addEventListener('click', this.deleteOnClick.bind(this));
+        deleteButton.appendChild(DeleteButtonIcon);
+
+        // Konfiguracja ikony 'Sortuj'
+        SortButtonIcon.classList.add("bi");
+        SortButtonIcon.classList.add("bi-bar-chart");
 
         // Konfiguracja przycisku 'Sortuj' przy folderze
-        sortButton.textContent = "Sortuj";
         sortButton.classList.add("btn");
         sortButton.classList.add("btn-success");
         sortButton.classList.add("m-1");
         sortButton.addEventListener('click', this.sortOnClick.bind(this, res[index].treeID));
+        sortButton.appendChild(SortButtonIcon);
+
+        // Konfiguracja ikony 'Rozwiń węzeł'
+        LeafButtonIcon.classList.add("bi");
+        LeafButtonIcon.classList.add("bi-folder2-open");
 
         // Konfiguracja przycisku 'Rozwiń węzeł' przy folderze
-        leafButton.textContent = "Rozwiń cały węzeł";
         leafButton.classList.add("btn");
         leafButton.classList.add("btn-secondary");
         leafButton.classList.add("m-1");
         leafButton.addEventListener('click', this.expandLeafOnClick.bind(this));
+        leafButton.appendChild(LeafButtonIcon);
 
         // Dodanie przycisków do kontenera
         buttonContainer.appendChild(addButton);
@@ -241,6 +266,11 @@ export class TreeService {
     const leafButton: HTMLParagraphElement = this.renderer.createElement('button');
 
     const buttonIcon: HTMLParagraphElement = this.renderer.createElement('i');
+    const AddButtonIcon: HTMLParagraphElement = this.renderer.createElement('i');
+    const EditButtonIcon: HTMLParagraphElement = this.renderer.createElement('i');
+    const DeleteButtonIcon: HTMLParagraphElement = this.renderer.createElement('i');
+    const SortButtonIcon: HTMLParagraphElement = this.renderer.createElement('i');
+    const LeafButtonIcon: HTMLParagraphElement = this.renderer.createElement('i');
 
     // Dodanie klasy identyfikującej do upuszczenia folderu
     ul.classList.add("folder-container");
@@ -285,41 +315,61 @@ export class TreeService {
     // Dodanie ikony do tekstu
     buttonSpan.appendChild(buttonIcon);
 
+    // Konfiguracja ikony 'Dodaj'
+    AddButtonIcon.classList.add("bi");
+    AddButtonIcon.classList.add("bi-folder-plus");
+
     // Konfiguracja przycisku 'Dodaj' przy folderze
-    addButton.textContent = 'Dodaj';
     addButton.classList.add('btn');
     addButton.classList.add('btn-primary');
     addButton.classList.add('m-1');
     addButton.addEventListener('click', this.addOnClick.bind(this));
+    addButton.appendChild(AddButtonIcon);
+
+    // Konfiguracja ikony 'Zmień'
+    EditButtonIcon.classList.add("bi");
+    EditButtonIcon.classList.add("bi-cursor-text");
 
     // Konfiguracja przycisku 'Zmień' przy folderze
-    changeButton.textContent = "Zmień";
     changeButton.classList.add('btn');
     changeButton.classList.add('btn-warning');
     changeButton.classList.add('text-white');
     changeButton.classList.add('m-1');
     changeButton.addEventListener('click', this.changeOnClick.bind(this));
+    changeButton.appendChild(EditButtonIcon);
+
+    // Konfiguracja ikony 'Usuń'
+    DeleteButtonIcon.classList.add("bi");
+    DeleteButtonIcon.classList.add("bi-folder-x");
 
     // Konfiguracja przycisku 'Usuń' przy folderze
-    deleteButton.textContent = "Usuń";
     deleteButton.classList.add("btn");
     deleteButton.classList.add("btn-danger");
     deleteButton.classList.add("m-1");
     deleteButton.addEventListener('click', this.deleteOnClick.bind(this));
+    deleteButton.appendChild(DeleteButtonIcon);
+
+    // Konfiguracja ikony 'Sortuj'
+    SortButtonIcon.classList.add("bi");
+    SortButtonIcon.classList.add("bi-bar-chart");
 
     // Konfiguracja przycisku 'Sortuj' przy folderze
-    sortButton.textContent = "Sortuj";
     sortButton.classList.add("btn");
     sortButton.classList.add("btn-success");
     sortButton.classList.add("m-1");
     sortButton.addEventListener('click', this.sortOnClick.bind(this, res.treeID));
+    sortButton.appendChild(SortButtonIcon);
+
+    // Konfiguracja ikony 'Rozwiń węzeł'
+    LeafButtonIcon.classList.add("bi");
+    LeafButtonIcon.classList.add("bi-folder2-open");
 
     // Konfiguracja przycisku 'Rozwiń węzeł' przy folderze
-    leafButton.textContent = "Rozwiń cały węzeł";
     leafButton.classList.add("btn");
     leafButton.classList.add("btn-secondary");
     leafButton.classList.add("m-1");
     leafButton.addEventListener('click', this.expandLeafOnClick.bind(this));
+    leafButton.appendChild(LeafButtonIcon);
 
     // Dodanie przycisków do kontenera
     buttonContainer.appendChild(addButton);
