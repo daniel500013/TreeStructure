@@ -1,6 +1,9 @@
 using Microsoft.EntityFrameworkCore;
+using System.Runtime.CompilerServices;
 using Tree.Api;
 using Tree.Api.Service;
+
+[assembly: InternalsVisibleTo("Tree.Tests")]
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -7,3 +7,5 @@
 /Tree.Api/Migrations
 /Tree.Api/.vs/Tree.Api/v17
 /Tree.Api/.vs/
+/Tree.Tests/bin/Debug/net6.0
+/Tree.Tests/obj
