@@ -431,8 +431,8 @@ export class TreeService {
     var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
 
     // Walidacja danych
-    if (format.test(name)) {
-      alert("Nazwa folderu nie może zawierać znaków specjalnych!");
+    if (format.test(name) || name == "" || name.charAt(0) == ' ') {
+      alert("Nazwa folderu nie może zawierać znaków specjalnych ani być pusta!");
     }
     else {
       // Dto 
@@ -461,8 +461,8 @@ export class TreeService {
     var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
     
     // Walidacja danych
-    if (format.test(name)) {
-      alert("Nazwa folderu nie może zawierać znaków specjalnych!");
+    if (format.test(name) || name == "" || name.charAt(0) == ' ') {
+      alert("Nazwa folderu nie może zawierać znaków specjalnych ani być pusta!");
     }
     else {
       // Dto
