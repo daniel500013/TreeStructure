@@ -18,8 +18,9 @@ Aby dodać baze z migracij użyj polecenia update-database w menadżerze pakiet�
 ### Dodawanie (Sposób 2)
 Aby dodać baze z migracij użyć gotowego skryptu w folderze Tools i uruchomić go w konsoli komendą
 > ./migrations.sh
+
 Uwaga
-Do wykorzystania skryptu wymagane jest CLI i zainstalowanie pakirtu `dotnet tool install --global dotnet-ef`
+Do wykorzystania skryptu wymagane jest CLI i zainstalowanie pakietu `dotnet tool install --global dotnet-ef`
 
 # Uruchomienie (Sposób 1)
 Aby uruchomić aplikacje należy włączyć projekt za pomocą visual studio 2022 a następnie kliknąć u góry zielony przycisk który pozwoli uruchomić program.
