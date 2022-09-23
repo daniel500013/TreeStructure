@@ -1,5 +1,6 @@
 ﻿using Tree.Api.Dto;
 using Tree.Api.ViewModel;
+using Microsoft.EntityFrameworkCore;
 
 namespace Tree.Api.Service
 {
@@ -78,24 +79,34 @@ namespace Tree.Api.Service
                 throw new ArgumentOutOfRangeException("Invalid ID");
             }
 
-            var tree = _dbContext.Tree.FirstOrDefault(x => x.TreeID == id);
+            var tree = _dbContext.Tree
+                .Include(x => x.TreeProp)
+                .FirstOrDefault(x => x.TreeID == id);
 
             if (tree is null)
             {
                 throw new ArgumentNullException("Invalid Tree ID");
             }
+            RemoveChildren(tree);
+            //_dbContext.Tree.Remove(tree);
+            _dbContext.SaveChanges();
+        }
 
-            var treeChild = _dbContext.Tree
-                .Where(x => x.ParentID == id)
-                .ToList();
-
-            foreach (var child in treeChild)
+        private void RemoveChildren(Model.Tree tree)
+        {
+            if (tree.TreeProp != null)
             {
-                _dbContext.Tree.Remove(child);
+                var children = _dbContext.Tree
+                    .Include(x => x.TreeProp)
+                    .Where(x => x.ParentID == tree.TreeID);
+
+                foreach (var child in children)
+                {
+                    RemoveChildren(child);
+                }
             }
 
-            _dbContext.Tree.Remove(tree);
-            _dbContext.SaveChanges();
+            _dbContext.Remove(tree);
         }
     }
 }
