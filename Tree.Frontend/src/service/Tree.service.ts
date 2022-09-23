@@ -228,7 +228,7 @@ export class TreeService {
     }
   }
 
-  addNode(res: any, parentID: any) {
+  addNode(res: any, parentID: any) {   
     const ul: HTMLParagraphElement = this.renderer.createElement('ul');
     const li: HTMLParagraphElement = this.renderer.createElement('li');
     const button: HTMLParagraphElement = this.renderer.createElement('button');
@@ -334,6 +334,27 @@ export class TreeService {
     // Dodanie klas do elementu listy
     li.classList.add('list-unstyled');
     li.classList.add('mt-1');
+
+    let mainParent: any = (<HTMLInputElement>(document.getElementById(parentID.id.toString())));
+    for (const child of mainParent.children) {
+      if (child.tagName == "UL")
+      {
+        if (child.lastChild != null)
+        {
+          if (child.lastChild.classList.contains("d-none")) {
+            li.classList.add('d-none');
+          }
+          else {
+            li.classList.remove('d-none');
+          }
+        }
+      }
+    }
+
+    // if (parentID.lastChild.lastChild.classList.contains("d-none"))
+    // {
+    //   li.classList.add('d-none');
+    // }
 
     // Przypisanie id elementowi listy
     li.id = res.treeID;
