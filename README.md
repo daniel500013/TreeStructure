@@ -32,7 +32,12 @@ Aby uruchomić aplikacje należy wejść do folderu z aplikacją (Tree.Api) a na
 <br />
 ``Node >16``
 <br />
+``npm >8``
+<br />
 # Uruchomienie
-Aby uruchomić aplikacje należy wejść do folderu (Tree.Frontend) a następnie wpisać w konsoli komende `ng serve`.
+Aby uruchomić aplikacje należy wejść do folderu (Tree.Frontend) a następnie wpisać w konsoli komende `npm install`.
+Menadżer pakietów powinien wówczas zainstalować wszystkie niezbędne pakiety potrzebne do uruchomienia projektu.
+
+Po uzupełnieniu wszystkich niezbednych pakietów wpisz w konsoli komende ``ng serve`` a następnie poczekaj na uruchomienie się projektu
 
 Aplikacja powinna domyślnie uruchomić się pod adresem http://localhost:4200
