@@ -25,8 +25,14 @@ export class TreeService {
       const changeButton: HTMLParagraphElement = this.renderer.createElement('button');
       const deleteButton: HTMLParagraphElement = this.renderer.createElement('button');
       const sortButton: HTMLParagraphElement = this.renderer.createElement('button');
+      const leafButton: HTMLParagraphElement = this.renderer.createElement('button');
       
       const buttonIcon: HTMLParagraphElement = this.renderer.createElement('i');
+      const AddButtonIcon: HTMLParagraphElement = this.renderer.createElement('i');
+      const EditButtonIcon: HTMLParagraphElement = this.renderer.createElement('i');
+      const DeleteButtonIcon: HTMLParagraphElement = this.renderer.createElement('i');
+      const SortButtonIcon: HTMLParagraphElement = this.renderer.createElement('i');
+      const LeafButtonIcon: HTMLParagraphElement = this.renderer.createElement('i');
 
       let parentNode = (<HTMLInputElement>(document.getElementById(res[index].parentID)));
       
@@ -75,40 +81,68 @@ export class TreeService {
         // Dodanie ikony do tekstu
         buttonSpan.appendChild(buttonIcon);
 
+        // Konfiguracja ikony 'Dodaj'
+        AddButtonIcon.classList.add("bi");
+        AddButtonIcon.classList.add("bi-folder-plus");
+        
         // Konfiguracja przycisku 'Dodaj' przy folderze
-        addButton.textContent = 'Dodaj';
         addButton.classList.add('btn');
         addButton.classList.add('btn-primary');
         addButton.classList.add('m-1');
         addButton.addEventListener('click', this.addOnClick.bind(this));
+        addButton.appendChild(AddButtonIcon);
+
+        // Konfiguracja ikony 'Zmień'
+        EditButtonIcon.classList.add("bi");
+        EditButtonIcon.classList.add("bi-cursor-text");
 
         // Konfiguracja przycisku 'Zmień' przy folderze
-        changeButton.textContent = "Zmień";
         changeButton.classList.add('btn');
         changeButton.classList.add('btn-warning');
         changeButton.classList.add('text-white');
         changeButton.classList.add('m-1');
         changeButton.addEventListener('click', this.changeOnClick.bind(this));
+        changeButton.appendChild(EditButtonIcon);
+
+        // Konfiguracja ikony 'Usuń'
+        DeleteButtonIcon.classList.add("bi");
+        DeleteButtonIcon.classList.add("bi-folder-x");
 
         // Konfiguracja przycisku 'Usuń' przy folderze
-        deleteButton.textContent = "Usuń";
         deleteButton.classList.add("btn");
         deleteButton.classList.add("btn-danger");
         deleteButton.classList.add("m-1");
         deleteButton.addEventListener('click', this.deleteOnClick.bind(this));
+        deleteButton.appendChild(DeleteButtonIcon);
+
+        // Konfiguracja ikony 'Sortuj'
+        SortButtonIcon.classList.add("bi");
+        SortButtonIcon.classList.add("bi-bar-chart");
 
         // Konfiguracja przycisku 'Sortuj' przy folderze
-        sortButton.textContent = "Sortuj";
         sortButton.classList.add("btn");
         sortButton.classList.add("btn-success");
         sortButton.classList.add("m-1");
         sortButton.addEventListener('click', this.sortOnClick.bind(this, res[index].treeID));
+        sortButton.appendChild(SortButtonIcon);
+
+        // Konfiguracja ikony 'Rozwiń węzeł'
+        LeafButtonIcon.classList.add("bi");
+        LeafButtonIcon.classList.add("bi-folder2-open");
+
+        // Konfiguracja przycisku 'Rozwiń węzeł' przy folderze
+        leafButton.classList.add("btn");
+        leafButton.classList.add("btn-secondary");
+        leafButton.classList.add("m-1");
+        leafButton.addEventListener('click', this.expandLeafOnClick.bind(this));
+        leafButton.appendChild(LeafButtonIcon);
 
         // Dodanie przycisków do kontenera
         buttonContainer.appendChild(addButton);
         buttonContainer.appendChild(changeButton);
         buttonContainer.appendChild(deleteButton);
         buttonContainer.appendChild(sortButton);
+        buttonContainer.appendChild(leafButton);
 
         // Dodanie kontenera do przycisku folderu
         button.appendChild(buttonContainer);
@@ -219,7 +253,7 @@ export class TreeService {
     }
   }
 
-  addNode(res: any, parentID: any) {
+  addNode(res: any, parentID: any) {   
     const ul: HTMLParagraphElement = this.renderer.createElement('ul');
     const li: HTMLParagraphElement = this.renderer.createElement('li');
     const button: HTMLParagraphElement = this.renderer.createElement('button');
@@ -229,8 +263,14 @@ export class TreeService {
     const changeButton: HTMLParagraphElement = this.renderer.createElement('button');
     const deleteButton: HTMLParagraphElement = this.renderer.createElement('button');
     const sortButton: HTMLParagraphElement = this.renderer.createElement('button');
+    const leafButton: HTMLParagraphElement = this.renderer.createElement('button');
 
     const buttonIcon: HTMLParagraphElement = this.renderer.createElement('i');
+    const AddButtonIcon: HTMLParagraphElement = this.renderer.createElement('i');
+    const EditButtonIcon: HTMLParagraphElement = this.renderer.createElement('i');
+    const DeleteButtonIcon: HTMLParagraphElement = this.renderer.createElement('i');
+    const SortButtonIcon: HTMLParagraphElement = this.renderer.createElement('i');
+    const LeafButtonIcon: HTMLParagraphElement = this.renderer.createElement('i');
 
     // Dodanie klasy identyfikującej do upuszczenia folderu
     ul.classList.add("folder-container");
@@ -275,40 +315,68 @@ export class TreeService {
     // Dodanie ikony do tekstu
     buttonSpan.appendChild(buttonIcon);
 
+    // Konfiguracja ikony 'Dodaj'
+    AddButtonIcon.classList.add("bi");
+    AddButtonIcon.classList.add("bi-folder-plus");
+
     // Konfiguracja przycisku 'Dodaj' przy folderze
-    addButton.textContent = 'Dodaj';
     addButton.classList.add('btn');
     addButton.classList.add('btn-primary');
     addButton.classList.add('m-1');
     addButton.addEventListener('click', this.addOnClick.bind(this));
+    addButton.appendChild(AddButtonIcon);
+
+    // Konfiguracja ikony 'Zmień'
+    EditButtonIcon.classList.add("bi");
+    EditButtonIcon.classList.add("bi-cursor-text");
 
     // Konfiguracja przycisku 'Zmień' przy folderze
-    changeButton.textContent = "Zmień";
     changeButton.classList.add('btn');
     changeButton.classList.add('btn-warning');
     changeButton.classList.add('text-white');
     changeButton.classList.add('m-1');
     changeButton.addEventListener('click', this.changeOnClick.bind(this));
+    changeButton.appendChild(EditButtonIcon);
+
+    // Konfiguracja ikony 'Usuń'
+    DeleteButtonIcon.classList.add("bi");
+    DeleteButtonIcon.classList.add("bi-folder-x");
 
     // Konfiguracja przycisku 'Usuń' przy folderze
-    deleteButton.textContent = "Usuń";
     deleteButton.classList.add("btn");
     deleteButton.classList.add("btn-danger");
     deleteButton.classList.add("m-1");
     deleteButton.addEventListener('click', this.deleteOnClick.bind(this));
+    deleteButton.appendChild(DeleteButtonIcon);
+
+    // Konfiguracja ikony 'Sortuj'
+    SortButtonIcon.classList.add("bi");
+    SortButtonIcon.classList.add("bi-bar-chart");
 
     // Konfiguracja przycisku 'Sortuj' przy folderze
-    sortButton.textContent = "Sortuj";
     sortButton.classList.add("btn");
     sortButton.classList.add("btn-success");
     sortButton.classList.add("m-1");
     sortButton.addEventListener('click', this.sortOnClick.bind(this, res.treeID));
+    sortButton.appendChild(SortButtonIcon);
+
+    // Konfiguracja ikony 'Rozwiń węzeł'
+    LeafButtonIcon.classList.add("bi");
+    LeafButtonIcon.classList.add("bi-folder2-open");
+
+    // Konfiguracja przycisku 'Rozwiń węzeł' przy folderze
+    leafButton.classList.add("btn");
+    leafButton.classList.add("btn-secondary");
+    leafButton.classList.add("m-1");
+    leafButton.addEventListener('click', this.expandLeafOnClick.bind(this));
+    leafButton.appendChild(LeafButtonIcon);
 
     // Dodanie przycisków do kontenera
     buttonContainer.appendChild(addButton);
     buttonContainer.appendChild(changeButton);
     buttonContainer.appendChild(deleteButton);
     buttonContainer.appendChild(sortButton);
+    buttonContainer.appendChild(leafButton);
 
     // Dodanie kontenera do przycisku folderu
     button.appendChild(buttonContainer);
@@ -316,6 +384,27 @@ export class TreeService {
     // Dodanie klas do elementu listy
     li.classList.add('list-unstyled');
     li.classList.add('mt-1');
+
+    let mainParent: any = (<HTMLInputElement>(document.getElementById(parentID.id.toString())));
+    for (const child of mainParent.children) {
+      if (child.tagName == "UL")
+      {
+        if (child.lastChild != null)
+        {
+          if (child.lastChild.classList.contains("d-none")) {
+            li.classList.add('d-none');
+          }
+          else {
+            li.classList.remove('d-none');
+          }
+        }
+      }
+    }
+
+    // if (parentID.lastChild.lastChild.classList.contains("d-none"))
+    // {
+    //   li.classList.add('d-none');
+    // }
 
     // Przypisanie id elementowi listy
     li.id = res.treeID;
@@ -440,6 +529,33 @@ export class TreeService {
     tmp.forEach(element => {
       rootComponent.appendChild(element);
     });
+  }
+
+  expandLeafOnClick(event: any) {
+    // Inicializacja zmiennej rodzica
+    let liParentElement: any;
+    
+    // Sprawdzenie typu argumentu
+    if (event.type == 'click')
+    {
+      liParentElement = event.target.parentElement.parentElement.parentElement;
+    }
+    else
+    {
+      liParentElement = event.parentElement.parentElement.parentElement;
+    }
+    
+    // Wypisanie wszystkich 'dzieci' elementu
+    for (const child of liParentElement.children) {
+      if (child.tagName == "UL")
+      {
+        // Rekurencja
+        this.expandLeafOnClick(child.firstChild.firstChild.lastChild.lastChild);
+
+        // Pokazanie węzła
+        child.firstChild.classList.remove("d-none");
+      }
+    }
   }
 
   dragStart(event: any) {
