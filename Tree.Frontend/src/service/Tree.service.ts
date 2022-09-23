@@ -201,12 +201,16 @@ export class TreeService {
         // Dodanie ikony do tekstu
         buttonSpan.appendChild(buttonIcon);
 
+        // Konfiguracja ikony 'Dodaj'
+        AddButtonIcon.classList.add("bi");
+        AddButtonIcon.classList.add("bi-folder-plus");
+
         // Konfiguracja przycisku 'Dodaj' przy folderze
-        addButton.textContent = 'Dodaj';
         addButton.classList.add('btn');
         addButton.classList.add('btn-primary');
         addButton.classList.add('m-1');
         addButton.addEventListener('click', this.addOnClick.bind(this));
+        addButton.appendChild(AddButtonIcon);
 
         // Dodanie przycisku do kontenera
         buttonContainer.appendChild(addButton);
