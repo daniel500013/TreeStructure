@@ -1,2 +1,47 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "~bootstrap-icons/font/bootstrap-icons.css";
+
+.gridCenter {
+    display: grid;
+    place-items: center;
+}
+
+.blue-gradient {
+    background-image: linear-gradient(0deg, rgb(38, 50, 127), rgb(3, 118, 162)) !important;
+}
+
+.rotate-5 {
+    transform: rotate(5deg);
+}
+
+.vh-40 {
+    height: 40vh !important;
+}
+
+.vw-75 {
+    width: 75vw !important;
+}
+
+.vh-42 {
+    height: 42vh !important;
+}
+
+.vw-77 {
+    width: 77vw !important;
+}
+
+.folder-bg {
+    background-color: #DAEAFF !important;
+}
+
+.folder-bg:hover {
+    background-color: #bfdafc !important;
+}
+
+.mt-2-5 {
+    margin-top: 0.75rem !important;
+}
+
+.drag {
+    opacity: 0.5;
+}
