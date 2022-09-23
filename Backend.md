@@ -17,3 +17,10 @@ Aby dodać baze z migracij użyć gotowego skryptu w folderze Tools i uruchomić
 
 Uwaga
 Do wykorzystania skryptu wymagane jest CLI i zainstalowanie pakirtu `dotnet tool install --global dotnet-ef`
+
+# Uruchomienie (Sposób 1)
+Aby uruchomić aplikacje należy włączyć projekt za pomocą visual studio 2022 a następnie kliknąć u góry zielony przycisk który pozwoli uruchomić program.
+# Uruchomienie (Sposób 2)
+Aby uruchomić aplikacje należy wejść do folderu z aplikacją (Tree.Api) a następnie wpisać w konsoli komende dotnet run (Wymagane dotnet cli)
+
+
